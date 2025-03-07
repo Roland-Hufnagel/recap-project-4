@@ -4,9 +4,12 @@ import Theme from "./components/Theme";
 import ThemeForm from "./components/ThemeForm";
 import { themes as initialThemes } from "./db";
 import { uid } from "uid";
+import useLocalStorageState from "use-local-storage-state";
 
 function App() {
-  const [themes, setThemes] = useState(initialThemes);
+  const [themes, setThemes] = useLocalStorageState("themes", {
+    defaultValue: initialThemes,
+  });
 
   function handleDeleteTheme(idToDelete) {
     setThemes(themes.filter((theme) => theme.id !== idToDelete));
