@@ -20,4 +20,5 @@
 }
 .card-color__value {
   color: #666;
+  display: inline-block;
 }
