@@ -3,7 +3,7 @@ import DetailsView from "../DetailsView";
 import Preview from "../Preview";
 import "./Theme.css";
 
-export default function Theme({ theme }) {
+export default function Theme({ theme, onDeleteTheme }) {
   const [detailsView, setDetailsView] = useState(false);
   function toggleView() {
     setDetailsView(!detailsView);
@@ -45,7 +45,11 @@ export default function Theme({ theme }) {
         </button>
       </div>
 
-      {detailsView ? <DetailsView theme={theme} /> : <Preview theme={theme} />}
+      {detailsView ? (
+        <DetailsView theme={theme} onDeleteTheme={onDeleteTheme} />
+      ) : (
+        <Preview theme={theme} />
+      )}
     </article>
   );
 }
