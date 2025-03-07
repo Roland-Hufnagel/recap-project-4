@@ -1,0 +1,23 @@
+.card {
+  height: 100px;
+  max-width: 400px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+.card-info {
+  padding: 10px;
+  background-color: #ccc;
+  width: 30%;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  text-align: center;
+}
+.card-color__role {
+  font-size: 1.3rem;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.card-color__value {
+  color: #666;
+}

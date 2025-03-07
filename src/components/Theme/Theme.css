@@ -1,0 +1,12 @@
+.theme-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.theme{
+    max-width: 400px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 3px;
+}
