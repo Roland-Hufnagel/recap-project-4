@@ -8,10 +8,7 @@ export default function ColorCard({ color }) {
       const response = await fetch(
         `https://www.thecolorapi.com/id?hex=${color.value.slice(1)}`
       );
-      console.log("color.value.slice(1): ", color.value.slice(1));
       const data = await response.json();
-      console.log("data: ", data);
-
       setColorName(data.name.value);
     }
     fetchColorName();

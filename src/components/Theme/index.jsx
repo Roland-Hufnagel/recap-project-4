@@ -2,18 +2,31 @@ import { useState } from "react";
 import DetailsView from "../DetailsView";
 import Preview from "../Preview";
 import "./Theme.css";
+import ThemeForm from "../ThemeForm";
 
-export default function Theme({ theme, onDeleteTheme }) {
-  const [detailsView, setDetailsView] = useState(false);
-  function toggleView() {
-    setDetailsView(!detailsView);
+export default function Theme({ theme, onDeleteTheme, onEditTheme }) {
+  //const [detailsView, setDetailsView] = useState(false);
+  const [displayMode, setDisplayMode] = useState("preview");
+
+  function setViewToDetail() {
+    setDisplayMode("detail");
+  }
+  function setViewToPreview() {
+    setDisplayMode("preview");
+  }
+  function setViewToEdit() {
+    setDisplayMode("edit");
   }
   return (
     <article className="theme">
       <div className="theme-title">
         <h2>{theme.name}</h2>
-        <button onClick={toggleView}>
-          {detailsView ? (
+        <button
+          onClick={
+            displayMode === "preview" ? setViewToDetail : setViewToPreview
+          }
+        >
+          {displayMode === "preview" ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -44,11 +57,24 @@ export default function Theme({ theme, onDeleteTheme }) {
           )}
         </button>
       </div>
-
-      {detailsView ? (
-        <DetailsView theme={theme} onDeleteTheme={onDeleteTheme} />
-      ) : (
-        <Preview theme={theme} />
+      {displayMode === "detail" && (
+        <DetailsView
+          theme={theme}
+          onDeleteTheme={onDeleteTheme}
+          onEditTheme={setViewToEdit}
+        />
+      )}
+      {displayMode === "preview" && <Preview theme={theme} />}
+      {displayMode === "edit" && (
+        <ThemeForm
+          initialTheme={theme}
+          isEditMode
+          onSubmit={(newTheme) => {
+            newTheme.id = theme.id;
+            onEditTheme(newTheme);
+            setDisplayMode("preview");
+          }}
+        />
       )}
     </article>
   );

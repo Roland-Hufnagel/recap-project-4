@@ -15,20 +15,28 @@ function App() {
   }
 
   function handleAddTheme(newTheme) {
-    const themeToAdd = { colors: [], id: uid(), name: newTheme.name };
-    const colors = Object.entries(newTheme).slice(1);
-    colors.forEach((color) => {
-      themeToAdd.colors.push({ role: color[0], value: color[1] });
+    newTheme.id = uid();
+    setThemes([newTheme, ...themes]);
+  }
+
+  function handleEditTheme(newTheme) {
+    const newThemes = themes.map((theme) => {
+      return theme.id === newTheme.id ? newTheme : theme;
     });
-    setThemes([themeToAdd, ...themes]);
+    setThemes(newThemes);
   }
 
   return (
     <>
       <h1>Theme Creator</h1>
-      <ThemeForm onAddTheme={handleAddTheme} />
+      <ThemeForm onSubmit={handleAddTheme} />
       {themes.map((theme) => (
-        <Theme theme={theme} key={theme.id} onDeleteTheme={handleDeleteTheme} />
+        <Theme
+          theme={theme}
+          key={theme.id}
+          onDeleteTheme={handleDeleteTheme}
+          onEditTheme={handleEditTheme}
+        />
       ))}
     </>
   );
